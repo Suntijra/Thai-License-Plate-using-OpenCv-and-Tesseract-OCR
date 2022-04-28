@@ -1,4 +1,4 @@
-# Thai_license_plate
+# Thai License Plate using OpenCv and Tesseract OCR
 
 
 Thai License Plate using OpenCv and Tesseract OCR
