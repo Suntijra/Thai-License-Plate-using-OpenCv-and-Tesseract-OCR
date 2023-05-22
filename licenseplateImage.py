@@ -47,35 +47,34 @@ def extract_plate(img):
     #crop license plate
     #imageState = cv2.rectangle(image,(x,y+40),(x+w,y+h),(0, 255, 0),3)
     imgLicense_crop = gray_image[y+40:y+h , x:x +w] 
-    
+    custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=กขคฆงจฉชซฌญฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ0987654321'
+
     #OCR
-    text = pytesseract.image_to_string(license_plate, lang='tha',config='--psm 6')
+    text = pytesseract.image_to_string(license_plate, lang='tha',config=custom_config)
     text = ''.join(e for e in text if e.isalnum())
     print("License plate : ",text)  
     
     #thresh img OCR
-    textThresh = pytesseract.image_to_string(thresh_image, lang='tha',config='--psm 6')
+    textThresh = pytesseract.image_to_string(thresh_image, lang='tha',config=custom_config)
     textThresh = ''.join(e for e in text if e.isalnum())
     print("License plate thresh : ",textThresh) 
     
     #state img OCR
-    textState = pytesseract.image_to_string(imgLicense_crop, lang='tha',config='--psm 6')
+    textState = pytesseract.image_to_string(imgLicense_crop, lang='tha',config=custom_config)
     textState = ''.join(e for e in textState if e.isalnum())
     print("License plate state : ",textState)
     
   
 
-    cv2.imshow("Original Image",image)
-    cv2.imshow("Gray_Image",gray_image)
+    # cv2.imshow("Original Image",image)
+    # cv2.imshow("Gray_Image",gray_image)
     cv2.imshow("license_plate",license_plate)
     cv2.imshow("license_plate_Thresh",thresh_image)
-    # cv2.imshow("license_plate_Crop",imgLicense_crop)
+    cv2.imshow("license_plate_Crop",imgLicense_crop)
     # cv2.imshow("Noise_Image",noise_image)
-    
-    
     cv2.waitKey(0)
     
-path = 'LicensePlate/6.jpg'
+path = 'LicensePlate/10.jpg'
     
 extract_plate(path)
 
